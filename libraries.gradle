@@ -1,0 +1,61 @@
+
+ext {
+    google = [
+            coreKtx: "androidx.core:core-ktx:1.7.0",
+            fragmentKtx: "androidx.fragment:fragment-ktx:1.4.0",
+            appCompat: "androidx.appcompat:appcompat:1.4.0",
+            googleMaterial: "com.google.android.material:material:1.4.0",
+            constraintlayout: "androidx.constraintlayout:constraintlayout:2.1.2",
+            hiltAndroid: "com.google.dagger:hilt-android:2.44",
+            hiltAndroidCompiler: "com.google.dagger:hilt-compiler:2.44",
+            hiltWork: "androidx.hilt:hilt-work:1.0.0",
+            lifecycle_compiler: "androidx.lifecycle:lifecycle-compiler:2.5.1",
+            lifecycle_extensions: "androidx.lifecycle:lifecycle-extensions:2.5.1",
+            lifecycle_extensions_viewmodel: "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1",
+            lifecycle_livedata: "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1",
+            lifecycle_process: "androidx.lifecycle:lifecycle-process:2.5.1",
+            workRunner: "androidx.work:work-runtime:2.7.1",
+            gson: "com.google.code.gson:gson:2.8.5",
+            qrScan: "com.google.mlkit:barcode-scanning:16.2.0",
+            camera2: "androidx.camera:camera-camera2:1.0.1",
+            camera2LifeCycle: "androidx.camera:camera-lifecycle:1.0.1",
+            camera2View: "androidx.camera:camera-view:1.0.0-alpha27",
+            serialization: "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2",
+            locationService: "com.google.android.gms:play-services-location:19.0.1",
+            coilkt : "io.coil-kt:coil:2.1.0",
+            androidxSplash: "androidx.core:core-splashscreen:1.0.0-beta01",
+            navigation_fragment_ktx: "androidx.navigation:navigation-fragment-ktx:2.5.3",
+            navigation_ui_ktx: "androidx.navigation:navigation-ui-ktx:2.5.3",
+            encryptedPreference: "androidx.security:security-crypto:1.0.0"
+    ]
+
+    reactive = [
+            android: "io.reactivex.rxjava3:rxandroid:3.0.0",
+            java: "io.reactivex.rxjava3:rxjava:3.1.3"
+    ]
+
+    square = [
+            moshi: "com.squareup.moshi:moshi-kotlin:1.14.0",
+            moshiCodeGen: "com.squareup.moshi:moshi-kotlin-codegen:1.14.0",
+            moshiConverter: "com.squareup.retrofit2:converter-moshi:2.9.0",
+            retrofit: "com.squareup.retrofit2:retrofit:2.9.0",
+            retrofitRxAdapter: "com.squareup.retrofit2:adapter-rxjava3:2.9.0",
+            okhttpLogging: "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2",
+            picasso: "com.squareup.picasso:picasso:2.71828"
+    ]
+
+    intuit = [
+            sdp: 'com.intuit.sdp:sdp-android:1.0.6',
+            ssp: 'com.intuit.ssp:ssp-android:1.0.6'
+    ]
+
+    firebase = [
+            firebasemessaging:'com.google.firebase:firebase-messaging:23.0.3',
+            firebaseanalytics: 'com.google.firebase:firebase-analytics-ktx'
+    ]
+
+    epoxy = [
+            epoxyRecyclerView: "com.airbnb.android:epoxy:5.1.1",
+            epoxyRecyclerViewProcessor: "com.airbnb.android:epoxy-processor:5.1.1"
+    ]
+}

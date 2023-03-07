@@ -1,0 +1,105 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+apply from: file("$rootDir/libraries.gradle")
+
+android {
+    namespace 'com.codestracture'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.codestracture"
+        minSdk 23
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'BASE_URL', "\"https://portal.courtesycarsredhill.co.uk/CCRAPI/api/\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation google.coreKtx
+    implementation google.appCompat
+    implementation google.googleMaterial
+    implementation google.constraintlayout
+    implementation google.fragmentKtx
+    implementation google.gson
+    implementation google.navigation_fragment_ktx
+    implementation google.navigation_ui_ktx
+
+    //Epoxy
+    implementation epoxy.epoxyRecyclerView
+    kapt epoxy.epoxyRecyclerViewProcessor
+
+    //EncryptedSharedPreferences
+    implementation google.encryptedPreference
+
+    implementation google.lifecycle_extensions_viewmodel
+    implementation google.lifecycle_livedata
+    implementation google.lifecycle_process
+
+    //Reactive
+    implementation reactive.java
+    implementation reactive.android
+
+    //DI
+    implementation google.hiltAndroid
+    kapt google.hiltAndroidCompiler
+    implementation google.hiltWork
+
+    //Retrofit & OkHttp
+    implementation square.retrofit
+    implementation square.retrofitRxAdapter
+    implementation square.okhttpLogging
+    implementation square.moshi
+    implementation square.moshiConverter
+    kapt square.moshiCodeGen
+
+    implementation intuit.sdp
+    implementation intuit.ssp
+
+    implementation google.locationService
+
+    implementation 'androidx.work:work-runtime-ktx:2.8.0'
+}
+
+kapt {
+    correctErrorTypes true
+}
