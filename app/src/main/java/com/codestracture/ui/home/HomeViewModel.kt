@@ -1,5 +1,6 @@
 package com.codestracture.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,7 @@ import com.codestracture.ui.base.BaseViewModel
 import com.codestracture.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,9 +32,13 @@ class HomeViewModel @Inject constructor(
 
     private fun fetchNewTripDetails() {
         viewModelScope.launch(MAIN) {
-            delay(5000)
-            val list = listOf("Test", "Test1", "Test2")
-            mutableLiveData.postValue(list)
+            localRepository.getTripsData()
+                .catch {
+                    Log.d("MyTag", "Catch: ${it.message}")
+                }
+                .collect { list ->
+                    mutableLiveData.postValue(list)
+                }
         }
     }
 }
