@@ -6,6 +6,10 @@ on:
         description: 'The branch from which we have to build'
         required: true
         default: 'develop'
+      message:
+        description: 'Release Notes'
+        required: false
+        default: 'Bug Fix'
 jobs:
   build-android:
     runs-on: ubuntu-latest
@@ -37,4 +41,5 @@ jobs:
           appId: ${{secrets.FIREBASE_APP_ID_ANDROID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: android_testers
+          releaseNotes: ${{ github.event.inputs.message }}
           file: app-release.apk
