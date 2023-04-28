@@ -13,5 +13,4 @@ interface Api {
 
     @POST("AuthenticateMobileUser")
     suspend fun userData(): Response<BaseResponse<Any>>
-
 }

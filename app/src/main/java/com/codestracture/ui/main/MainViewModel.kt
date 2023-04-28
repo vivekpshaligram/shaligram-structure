@@ -11,9 +11,9 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val remoteRepository: RemoteRepository,
     private val localRepository: LocalRepository
-): BaseViewModel() {
+) : BaseViewModel() {
 
     init {
-        Log.d("MyTag","MainViewModelCall")
+        Log.d("MyTag", "MainViewModelCall")
     }
 }

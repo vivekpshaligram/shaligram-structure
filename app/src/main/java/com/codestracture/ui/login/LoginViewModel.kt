@@ -16,9 +16,7 @@ import com.codestracture.utils.ext.isValidEmail
 import com.codestracture.utils.ext.isValidPassword
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -95,6 +93,8 @@ class LoginViewModel @Inject constructor(
 
                 LoginReqData(email, password).also { reqData ->
                     remoteRepository.login(reqData)
+                        // .retry(2) { cause -> cause is NoInternetException }
+                        // .retryWhen { cause, attempt ->  && attempt < 2 }
                         .flowOn(IO)
                         .catch {
                             viewModelEvent.postValue(LoginViewModelEvent.LoginError(it.message.toString()))

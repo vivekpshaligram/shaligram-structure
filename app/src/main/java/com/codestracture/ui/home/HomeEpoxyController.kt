@@ -2,8 +2,6 @@ package com.codestracture.ui.home
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyController
-import com.codestracture.ui.view.TripDetailsView
-import com.codestracture.ui.view.TripDetailsViewModel_
 import com.codestracture.ui.view.tripDetailsView
 
 class HomeEpoxyController : EpoxyController() {
@@ -14,9 +12,10 @@ class HomeEpoxyController : EpoxyController() {
         requestModelBuild()
     }
 
-    private var rootViewClickListener: (View) -> Unit = {}
-    fun setRootClickListener(listener: (View) -> Unit) {
-       this.rootViewClickListener = listener
+    private var mainViewClickListener: (View) -> Unit = {}
+
+    fun setMainViewClickListener(mainViewClickListener: (View) -> Unit) {
+        this.mainViewClickListener = mainViewClickListener
     }
 
     override fun buildModels() {
@@ -24,7 +23,7 @@ class HomeEpoxyController : EpoxyController() {
             tripDetailsView {
                 id(index)
                 handleState(s)
-                rootClickListener(this@HomeEpoxyController.rootViewClickListener)
+                rootClickListener(this@HomeEpoxyController.mainViewClickListener)
             }
         }
     }

@@ -8,6 +8,7 @@ plugins {
 }
 
 apply from: file("$rootDir/libraries.gradle")
+apply from: file("$rootDir/ktlint.gradle")
 
 android {
     namespace 'com.codestracture'
@@ -58,10 +59,27 @@ android {
     }
 
     lintOptions {
-        checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
+        // set to true to turn off analysis progress reporting by lint
+        quiet true
+        // set to true to have all release builds run lint on issues with severity=fatal
+        // and abort the build (controlled by abortOnError above) if fatal issues are found
+        checkReleaseBuilds true
+        // if true, stop the gradle build if errors are found
         abortOnError false
+        // if true, only report errors
+        ignoreWarnings false
+        // if true, check all issues, including those that are off by default
+        checkAllWarnings true
+        // if true, treat all warnings as errors
+        warningsAsErrors true
+        // turn on the given issue id's
+        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+        // check *only* the given issue id's
+        checkOnly 'NewApi', 'InlinedApi'
+        // if true, don't include source code lines in the error output
+        noLines true
+        // if true, emit full/absolute paths to files with errors (true by default)
+        absolutePaths true
     }
 }
 
@@ -108,7 +126,13 @@ dependencies {
 
     implementation google.locationService
 
-    implementation 'androidx.work:work-runtime-ktx:2.8.0'
+    implementation 'androidx.work:work-runtime-ktx:2.8.1'
+
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.4.0'
+
+    implementation 'at.aau.itec.android.mediaplayer:mediaplayer:1.3.3'
+    implementation 'at.aau.itec.android.mediaplayer:mediaplayer-dash:1.3.3'
+    implementation 'at.aau.itec.android.mediaplayer:mediaplayer-gles:1.3.3'
 }
 
 kapt {

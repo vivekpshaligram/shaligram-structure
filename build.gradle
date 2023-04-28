@@ -6,3 +6,10 @@ plugins {
     id 'com.google.dagger.hilt.android' version '2.44' apply false
     id 'androidx.navigation.safeargs' version '2.5.3' apply false
 }
+
+task installGitHook(type: Copy) {
+    from new File(rootProject.rootDir, 'pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks') }
+    fileMode 0777
+}
+tasks.getByPath(':app:preBuild').dependsOn installGitHook

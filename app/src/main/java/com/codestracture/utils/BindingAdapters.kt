@@ -10,5 +10,4 @@ object BindingAdapters {
     fun setErrorMessage(view: TextInputLayout, errorMessage: Int?) {
         view.error = errorMessage?.let { view.context.getString(it) }
     }
-
 }

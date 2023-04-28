@@ -71,5 +71,4 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel> : Fragment(
     protected fun navigateTo(resId: Int) {
         navController.navigate(resId)
     }
-
 }

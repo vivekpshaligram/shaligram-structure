@@ -1,0 +1,33 @@
+configurations {
+    ktlint
+}
+dependencies {
+    ktlint "com.pinterest:ktlint:0.33.0"
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args(
+            "**/src/**/*.kt",
+            "**.kts",
+            "!**/build/**",
+            // Do not run with option "--log-level=debug" or "--log-level=trace" as the lint violations will be difficult
+            // to spot between the amount of output lines.
+    )
+}
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args(
+            "-F",
+            "**/src/**/*.kt",
+            "**.kts",
+            "!**/build/**",
+            // Do not run with option "--log-level=debug" or "--log-level=trace" as the lint violations will be difficult
+            // to spot between the amount of output lines.
+    )
+}

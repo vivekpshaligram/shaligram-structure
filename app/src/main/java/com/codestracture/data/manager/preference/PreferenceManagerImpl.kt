@@ -7,7 +7,6 @@ import androidx.security.crypto.MasterKeys
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-
 class PreferenceManagerImpl @Inject constructor(
     @ApplicationContext context: Context
 ) : PreferenceManager {
