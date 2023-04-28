@@ -61,7 +61,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         binding.epoxyRecyclerView.setController(homeController)
 
-        homeController.setRootViewClickListener {
+        homeController.setMainViewClickListener {
             Log.d("MyTag", "RootViewClick")
         }
 

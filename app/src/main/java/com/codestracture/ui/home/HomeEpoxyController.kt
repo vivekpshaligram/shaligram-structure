@@ -12,10 +12,10 @@ class HomeEpoxyController : EpoxyController() {
         requestModelBuild()
     }
 
-    private var rootViewClickListener: (View) -> Unit = {}
+    private var mainViewClickListener: (View) -> Unit = {}
 
-    fun setRootViewClickListener(rootViewClickListener: (View) -> Unit) {
-       this.rootViewClickListener = rootViewClickListener
+    fun setMainViewClickListener(mainViewClickListener: (View) -> Unit) {
+        this.mainViewClickListener = mainViewClickListener
     }
 
     override fun buildModels() {
@@ -23,7 +23,7 @@ class HomeEpoxyController : EpoxyController() {
             tripDetailsView {
                 id(index)
                 handleState(s)
-                rootClickListener(this@HomeEpoxyController.rootViewClickListener)
+                rootClickListener(this@HomeEpoxyController.mainViewClickListener)
             }
         }
     }

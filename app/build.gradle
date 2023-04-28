@@ -59,21 +59,27 @@ android {
     }
 
     lintOptions {
+        // set to true to turn off analysis progress reporting by lint
+        quiet true
         // set to true to have all release builds run lint on issues with severity=fatal
         // and abort the build (controlled by abortOnError above) if fatal issues are found
         checkReleaseBuilds true
         // if true, stop the gradle build if errors are found
         abortOnError false
         // if true, only report errors
-        ignoreWarnings true
+        ignoreWarnings false
         // if true, check all issues, including those that are off by default
         checkAllWarnings true
         // if true, treat all warnings as errors
         warningsAsErrors true
+        // turn on the given issue id's
+        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
         // check *only* the given issue id's
         checkOnly 'NewApi', 'InlinedApi'
         // if true, don't include source code lines in the error output
         noLines true
+        // if true, emit full/absolute paths to files with errors (true by default)
+        absolutePaths true
     }
 }
 
