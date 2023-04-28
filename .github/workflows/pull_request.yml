@@ -1,4 +1,4 @@
-name: pull-request-android-build-check-ktlint-ktlintFormat
+name: pull-request-verify
 on:
   pull_request:
     branches:
@@ -8,6 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Check Ktlint and KtlintFormat
+      - name: Check Lint
         run: |
-          chmod +x gradlew && ./gradlew ktlint && ./gradlew ktlintFormat
+          chmod +x gradlew && ./gradlew lint
+      - name: Check KTLint
+        run: |
+          chmod +x gradlew && ./gradlew ktlint
+      - name: Check KTLintFormat
+        run: |
+          chmod +x gradlew && ./gradlew ktlintFormat
