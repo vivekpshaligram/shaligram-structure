@@ -77,9 +77,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         binding.stopUpdate.setOnClickListener {
             // viewModel.stopLocationUpdate()
-            /*val intent = Intent(requireContext(), LauncherActivity::class.java)
-            intent.data = Uri.parse("https://beer.conn.dev?client_version=1")
-            startActivity(intent)*/
             Log.d("MyTag", "currentPage:$currentPage")
             val newList = getPage(list, currentPage, 10)
             Log.d("MyTag", "newListSize:${newList.size}")
