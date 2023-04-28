@@ -9,4 +9,12 @@
     <string name="invalid_email">Invalid email format</string>
     <string name="invalid_password">Invalid password format</string>
 
+    <string name="asset_statements">
+        [{
+            \"relation\": [\"delegate_permission/common.handle_all_urls\"],
+            \"target\": {
+                \"namespace\": \"web\",
+                \"site\": \"https://beer.conn.dev\"}
+        }]
+    </string>
 </resources>

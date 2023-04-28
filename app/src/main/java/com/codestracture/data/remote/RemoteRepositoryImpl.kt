@@ -6,7 +6,6 @@ import com.codestracture.data.api.model.response.BaseResponse
 import com.codestracture.utils.SafeApiRequest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import retrofit2.Response
 import javax.inject.Inject
 
 class RemoteRepositoryImpl @Inject constructor(
@@ -18,6 +17,6 @@ class RemoteRepositoryImpl @Inject constructor(
     }
 
     override fun userData(): Flow<BaseResponse<Any>> {
-        return flow { emit(SafeApiRequest().apiRequest { api.userData()}) }
+        return flow { emit(SafeApiRequest().apiRequest { api.userData() }) }
     }
 }

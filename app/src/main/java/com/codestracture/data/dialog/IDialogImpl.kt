@@ -1,11 +1,9 @@
 package com.codestracture.data.dialog
 
-
 import android.content.Context
 import android.content.DialogInterface
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 
 class IDialogImpl(

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@+id/login_fragment">
+    app:startDestination="@+id/video_screen_fragment">
 
     <fragment
         android:id="@+id/login_fragment"
@@ -28,5 +28,11 @@
         android:name="com.codestracture.ui.home.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/video_screen_fragment"
+        android:name="com.codestracture.ui.video.VideoPlayerScreeenFragement"
+        android:label="video_screen_fragment"
+        tools:layout="@layout/fragment_video_screen"/>
 
 </navigation>

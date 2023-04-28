@@ -9,8 +9,12 @@ import com.codestracture.R
 import com.codestracture.databinding.FragmentHomeBinding
 import com.codestracture.ui.base.BaseFragment
 import com.codestracture.utils.ext.checkAllPermissionGranted
+import com.codestracture.utils.ext.checkPermissionGranted
 import com.codestracture.utils.ext.requestPermissions
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.math.min
 import com.codestracture.ui.home.HomeEpoxyController as HomeController
 
 @AndroidEntryPoint
@@ -29,6 +33,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             when (event) {
                 is HomeViewModelEvent.TripDetailsSuccess -> {
                     homeController.setListStateData(event.data)
+                }
+                is HomeViewModelEvent.Test -> {
                 }
             }
         }
@@ -49,12 +55,44 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
                 }
             }
 
-        requestPermissions(permissionsRequest, arrayOf(Manifest.permission.CAMERA))
+        if (checkPermissionGranted(Manifest.permission.CAMERA).not()) {
+            requestPermissions(permissionsRequest, arrayOf(Manifest.permission.CAMERA))
+        }
 
         binding.epoxyRecyclerView.setController(homeController)
 
-        homeController.setRootClickListener {
-            Log.d("MyTag","RootViewClick")
+        homeController.setRootViewClickListener {
+            Log.d("MyTag", "RootViewClick")
         }
+
+        val list = ArrayList<String>()
+        for (i in 1..105) {
+            list.add("Item$i")
+        }
+
+        Log.d("MyTag", "ListSize:${list.size}")
+        Log.d("MyTag", "LastItem:${list.lastOrNull()}")
+
+        var currentPage = 1
+
+        binding.stopUpdate.setOnClickListener {
+            // viewModel.stopLocationUpdate()
+            /*val intent = Intent(requireContext(), LauncherActivity::class.java)
+            intent.data = Uri.parse("https://beer.conn.dev?client_version=1")
+            startActivity(intent)*/
+            Log.d("MyTag", "currentPage:$currentPage")
+            val newList = getPage(list, currentPage, 10)
+            Log.d("MyTag", "newListSize:${newList.size}")
+            Log.d("MyTag", "newListLastData:${newList.lastOrNull()}")
+            currentPage += 1
+        }
+    }
+
+    fun <T> getPage(sourceList: List<T>?, page: Int, pageSize: Int): List<T> {
+        // require(!(pageSize <= 0 || page <= 0)) { "invalid page size: $pageSize" }
+        val fromIndex = (page - 1) * pageSize
+        return if (sourceList == null || sourceList.size <= fromIndex) {
+            Collections.emptyList()
+        } else sourceList.subList(fromIndex, min(fromIndex + pageSize, sourceList.size))
     }
 }

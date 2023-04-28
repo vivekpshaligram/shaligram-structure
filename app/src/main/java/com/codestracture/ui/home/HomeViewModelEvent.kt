@@ -1,6 +1,7 @@
 package com.codestracture.ui.home
 
-
 sealed interface HomeViewModelEvent {
-    data class TripDetailsSuccess(val data: List<String>): HomeViewModelEvent
+    data class TripDetailsSuccess(val data: List<String>) : HomeViewModelEvent
+
+    object Test : HomeViewModelEvent
 }
