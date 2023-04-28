@@ -1,4 +1,4 @@
-name: android-build-apk
+name: develop-build-apk-push-firebase
 on:
   push:
     branches:
