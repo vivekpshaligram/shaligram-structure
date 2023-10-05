@@ -59,7 +59,7 @@ class LoginViewModel @Inject constructor(
                     if (isValid) {
                         null
                     } else {
-                        R.string.invalid_email
+                        R.string.invalid_password
                     }
                 } else {
                     R.string.mandatory_field
@@ -97,8 +97,10 @@ class LoginViewModel @Inject constructor(
                         // .retryWhen { cause, attempt ->  && attempt < 2 }
                         .flowOn(IO)
                         .catch {
+                            Log.d("MyTag","Login Response Error: ${it.message}")
                             viewModelEvent.postValue(LoginViewModelEvent.LoginError(it.message.toString()))
                         }.collect {
+                            Log.d("MyTag","Login Response: ${it.success} : ${it.data}")
                             if (it.success && it.data != null) {
                                 viewModelEvent.postValue(LoginViewModelEvent.LoginSuccess(it))
                             } else {

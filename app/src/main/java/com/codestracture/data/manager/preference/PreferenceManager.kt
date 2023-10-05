@@ -1,3 +1,7 @@
 package com.codestracture.data.manager.preference
 
-interface PreferenceManager
+interface PreferenceManager {
+
+    fun setLogin(isLogin: Boolean)
+    fun getLogin(): Boolean
+}

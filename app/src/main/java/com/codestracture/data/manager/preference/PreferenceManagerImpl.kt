@@ -23,5 +23,12 @@ class PreferenceManagerImpl @Inject constructor(
         )
     }
 
-    val editor: SharedPreferences.Editor = sharedPreferences.edit()
+    private val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
+    override fun setLogin(isLogin: Boolean) {
+        editor.putBoolean("IS_LOGIN", isLogin).apply()
+    }
+    override fun getLogin(): Boolean {
+        return sharedPreferences.getBoolean("IS_LOGIN", false)
+    }
 }
