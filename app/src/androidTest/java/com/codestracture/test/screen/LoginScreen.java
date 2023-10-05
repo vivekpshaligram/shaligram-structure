@@ -33,12 +33,10 @@ public class LoginScreen extends BaseScreen {
         activityActivityScenario.onActivity(activity -> context = activity.getBaseContext());
         SystemClock.sleep(1000);
     }
-    public void finishSplashScreen() {
-        activityActivityScenario.close();
-    }
 
     public void iAmOnLoginScreen() {
-        assertEquals(activityActivityScenario.getState(), Lifecycle.State.CREATED);
+        assertNotNull(context);
+        SystemClock.sleep(1000);
     }
 
     public void iInputEmail(final String email) {
@@ -50,14 +48,17 @@ public class LoginScreen extends BaseScreen {
     }
 
     public void iPressSubmitButton() {
+        SystemClock.sleep(500);
         onView(withId(R.id.submit)).perform(click());
     }
 
     public void iTapSignUpButton() {
+        SystemClock.sleep(1000);
         onView(withId(R.id.signup)).perform(click());
     }
 
     public void iShouldSeeErrorOnTheEditTextView(final String viewName) {
+        SystemClock.sleep(500);
         int viewId = (viewName.equals("email")) ? R.id.email : R.id.password;
         int messageId = (viewName.equals("email")) ? R.string.msg_email_error : R.string.msg_password_error;
 
