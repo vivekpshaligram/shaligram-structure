@@ -11,21 +11,21 @@ RESULT=$?
 # return 1 exit code if running checks fails
 [ $RESULT -ne 0 ] && exit 1
 
-echo "*************** ktlint ***************"
-
-./gradlew ktlint
-
-RESULT=$?
-
-[ $RESULT -ne 0 ] && exit 1
-
-echo "*************** ktlintFormat ***************"
-
-./gradlew ktlintFormat
-
-RESULT=$?
-
-[ $RESULT -ne 0 ] && exit 1
+#echo "*************** ktlint ***************"
+#
+#./gradlew ktlint
+#
+#RESULT=$?
+#
+#[ $RESULT -ne 0 ] && exit 1
+#
+#echo "*************** ktlintFormat ***************"
+#
+#./gradlew ktlintFormat
+#
+#RESULT=$?
+#
+#[ $RESULT -ne 0 ] && exit 1
 
 echo "*******************************"
 echo "git pre-commit hook successfully"

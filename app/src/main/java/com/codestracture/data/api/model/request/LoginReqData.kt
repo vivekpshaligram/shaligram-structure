@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class LoginReqData(
     @Order(value = 1)
-    @Json(name = "email") val password: String? = null,
+    @Json(name = "password") val password: String? = null,
     @Order(value = 2)
-    @Json(name = "email") val email: String? = null
+    @Json(name = "email_address") val email: String? = null
 )

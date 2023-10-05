@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" android:maxSdkVersion="29" />
@@ -15,6 +13,10 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <!-- camera preview demo -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -33,6 +35,10 @@
         android:theme="@style/Theme.CodeStracture"
         tools:targetApi="31">
 
+        <activity android:name=".ui.test.SplashActivity"/>
+        <activity android:name=".ui.test.LoginActivity"/>
+        <activity android:name=".ui.test.SignupActivity"/>
+
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
@@ -43,6 +49,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".ui.main.receiver.SimChangeReceivers"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SIM_STATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".ui.main.receiver.PingSmsReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="10">
+                <action android:name="android.intent.action.DATA_SMS_RECEIVED" />
+                <data
+                    android:host="*"
+                    android:scheme="sms" />
+            </intent-filter>
+        </receiver>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -87,5 +113,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
