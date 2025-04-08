@@ -44,8 +44,7 @@ jobs:
           done
 
       - name: Upload reports (optional)
-        if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: lint-detekt-reports
           path: app/build/reports/
