@@ -7,13 +7,53 @@ jobs:
   build-android:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+        
       - name: Check Lint
         run: |
           chmod +x gradlew && ./gradlew lint
+          
       - name: Check KTLint
         run: |
           chmod +x gradlew && ./gradlew ktlint
+          
       - name: Check KTLintFormat
         run: |
           chmod +x gradlew && ./gradlew ktlintFormat
+          
+      - name: Run detekt (Coding Standards Check)
+        run: ./gradlew detekt
+
+      - name: Check for forbidden words
+        run: |
+          echo "Checking for forbidden words like 'testing', 'staging', 'dummy'..."
+          forbidden_words=("testing" "staging" "dummy")
+          files_changed=$(git diff --name-only origin/${{ github.base_ref }})
+          
+          for file in $files_changed; do
+            if [[ $file == *.kt ]]; then
+              for word in "${forbidden_words[@]}"; do
+                if grep -i -n "$word" "$file"; then
+                  echo "::error file=$file::Forbidden word '$word' found. Please remove it."
+                  exit 1
+                fi
+              done
+            fi
+          done
+
+      - name: Upload reports (optional)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: lint-detekt-reports
+          path: app/build/reports/
