@@ -23,10 +23,12 @@ jobs:
         uses: gradle/gradle-build-action@v3
 
       - name: Run ktlint (Code Style Check)
-        run: ./gradlew ktlintCheck
+        run: |
+          chmod +x gradlew && ./gradlew ktlintCheck
 
       - name: Run detekt (Coding Standards Check)
-        run: ./gradlew detekt
+        run: |
+          chmod +x gradlew && ./gradlew detekt
 
       - name: Check for forbidden words
         run: |
