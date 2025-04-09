@@ -4,6 +4,8 @@ import android.content.Context
 import com.codestracture.BuildConfig
 import com.codestracture.data.api.Api
 import com.codestracture.data.api.interceptor.NetworkConnectionInterceptor
+import com.codestracture.data.manager.preference.PreferenceManager
+import com.codestracture.data.manager.resource.ResourceManger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,10 +27,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(
-        @ApplicationContext context: Context,
-        loggingInterceptor: HttpLoggingInterceptor
-    ): OkHttpClient {
+    fun provideOkHttpClient(@ApplicationContext context: Context, loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
             .addInterceptor(NetworkConnectionInterceptor(context))
@@ -51,13 +50,19 @@ object NetworkModule {
     @Singleton
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG)
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        }
         return loggingInterceptor
     }
 
     @Provides
     @Singleton
     fun provideApi(retrofit: Retrofit): Api = retrofit.create(Api::class.java)
+
+    @Singleton
+    @Provides
+    fun provideResourceManger(
+        @ApplicationContext context: Context,
+        preferenceManager: PreferenceManager
+    ): ResourceManger = ResourceManger(context, context.resources, preferenceManager)
 }

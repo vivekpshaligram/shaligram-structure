@@ -26,11 +26,10 @@ class LocationManagerImpl @Inject constructor(
     override fun getCurrentLocation(): Flow<Location?> = flow {
         if (context.checkPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION)) {
             val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            if (location != null) {
+            if (location != null)
                 emit(location)
-            } else {
+            else
                 throw Throwable("Location Service Not Enable")
-            }
         } else {
             throw Throwable("Location Permission Not Granted")
         }

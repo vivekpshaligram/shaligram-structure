@@ -3,7 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@+id/video_screen_fragment">
+    app:startDestination="@+id/epub_fragment">
+
+    <fragment
+        android:id="@+id/web_fragment"
+        android:name="com.codestracture.ui.web.WebFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/fragment_web"/>
+
+    <fragment
+        android:id="@+id/epub_fragment"
+        android:name="com.codestracture.ui.epub.EpubFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/fragment_epub"/>
+
+    <fragment
+        android:id="@+id/swipe_fragment"
+        android:name="com.codestracture.ui.swipe.SwipeFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/fragment_swipe"/>
 
     <fragment
         android:id="@+id/login_fragment"

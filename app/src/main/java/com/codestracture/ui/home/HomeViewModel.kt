@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.codestracture.data.local.LocalRepository
 import com.codestracture.data.manager.location.LocationManager
+import com.codestracture.data.manager.resource.ResourceManger
 import com.codestracture.data.remote.RemoteRepository
 import com.codestracture.ui.base.BaseViewModel
 import com.codestracture.utils.SingleLiveEvent
@@ -20,7 +21,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val remoteRepository: RemoteRepository,
     private val localRepository: LocalRepository,
-    private val locationManager: LocationManager
+    private val locationManager: LocationManager,
+    private val res: ResourceManger
 ) : BaseViewModel() {
 
     val viewModelEvent: SingleLiveEvent<HomeViewModelEvent> = SingleLiveEvent()

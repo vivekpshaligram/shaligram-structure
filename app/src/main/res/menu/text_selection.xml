@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_copy"
+        android:enabled="true"
+        android:title="Copy"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/menu_share"
+        android:enabled="true"
+        android:title="Share"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/menu_highlights"
+        android:enabled="true"
+        android:title="Highlights"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/menu_search"
+        android:enabled="true"
+        android:title="Search"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/menu_dictionary"
+        android:enabled="true"
+        android:title="Dictionary"
+        android:visible="true" />
+
+    <item
+        android:id="@+id/menu_find_mistake"
+        android:enabled="true"
+        android:title="Find Mistake?"
+        android:visible="true" />
+</menu>

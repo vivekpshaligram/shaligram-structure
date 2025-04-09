@@ -7,13 +7,12 @@ import com.codestracture.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class VideoPlayerScreeenFragement :
-    BaseFragment<FragmentVideoScreenBinding, VideoPlayerScreeenViewModel>() {
+class VideoPlayerScreeenFragement : BaseFragment<FragmentVideoScreenBinding, VideoPlayerScreeenViewModel>() {
 
     override val layoutId: Int = R.layout.fragment_video_screen
 
     override val viewModel: VideoPlayerScreeenViewModel by viewModels()
-//
+
 //    private var mMediaPlayerControl: MediaController.MediaPlayerControl? = null
 //    private var mMediaController: MediaController? = null
 

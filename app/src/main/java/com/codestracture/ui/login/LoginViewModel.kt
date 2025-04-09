@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.codestracture.R
 import com.codestracture.data.api.model.request.LoginReqData
 import com.codestracture.data.local.LocalRepository
+import com.codestracture.data.manager.resource.ResourceManger
 import com.codestracture.data.remote.RemoteRepository
 import com.codestracture.ui.base.BaseViewModel
 import com.codestracture.utils.ApiResult
@@ -16,20 +17,27 @@ import com.codestracture.utils.ext.isValidEmail
 import com.codestracture.utils.ext.isValidPassword
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val remoteRepository: RemoteRepository,
-    private val localRepository: LocalRepository
+    private val localRepository: LocalRepository,
+    val res: ResourceManger
 ) : BaseViewModel() {
 
     val viewModelEvent: SingleLiveEvent<LoginViewModelEvent> = SingleLiveEvent()
 
     var email = MutableLiveData<String>()
     var password = MutableLiveData<String>()
+    var buttonEnable = MediatorLiveData<Boolean>().apply {
+        addSource(email) { isValidate() }
+        addSource(password) { isValidate() }
+    }
 
     val emailAddressErrorMessage = MediatorLiveData<Int>()
         .apply {
@@ -46,7 +54,7 @@ class LoginViewModel @Inject constructor(
                     R.string.mandatory_field
                 }
 
-                setValue(message)
+                value = message
             }
         }
 
@@ -59,13 +67,13 @@ class LoginViewModel @Inject constructor(
                     if (isValid) {
                         null
                     } else {
-                        R.string.invalid_email
+                        R.string.invalid_password
                     }
                 } else {
                     R.string.mandatory_field
                 }
 
-                setValue(message)
+                value = message
             }
         }
 
@@ -97,8 +105,10 @@ class LoginViewModel @Inject constructor(
                         // .retryWhen { cause, attempt ->  && attempt < 2 }
                         .flowOn(IO)
                         .catch {
+                            Log.d("MyTag", "Login Response Error: ${it.message}")
                             viewModelEvent.postValue(LoginViewModelEvent.LoginError(it.message.toString()))
                         }.collect {
+                            Log.d("MyTag", "Login Response: ${it.success} : ${it.data}")
                             if (it.success && it.data != null) {
                                 viewModelEvent.postValue(LoginViewModelEvent.LoginSuccess(it))
                             } else {

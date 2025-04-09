@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.codestracture.R"/>
+
         <variable
             name="vm"
             type="com.codestracture.ui.login.LoginViewModel" />
@@ -84,6 +86,8 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:onClick="@{() -> vm.doLogin()}"
                 android:text="@string/btn_login"
+                android:textColor="@{vm.res.getThemeColor(R.color.white)}"
+                android:backgroundTint="@{vm.res.getThemeColor(R.color.buttonTitleColor)}"
                 app:layout_constraintTop_toBottomOf="@+id/tILPassword" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
