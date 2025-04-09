@@ -22,9 +22,17 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v3
 
-      - name: Run ktlint (Code Style Check)
+      - name: Check Lint
         run: |
-          chmod +x gradlew && ./gradlew ktlintCheck
+          chmod +x gradlew && ./gradlew lint
+          
+      - name: Check KTLint
+        run: |
+          chmod +x gradlew && ./gradlew ktlint
+          
+      - name: Check KTLintFormat
+        run: |
+          chmod +x gradlew && ./gradlew ktlintFormat
 
       - name: Run detekt (Coding Standards Check)
         run: |
