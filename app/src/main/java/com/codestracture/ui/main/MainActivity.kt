@@ -31,6 +31,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private val sentFilter = IntentFilter(SENT)
     private val deliveryFilter = IntentFilter(DELIVER)
+
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

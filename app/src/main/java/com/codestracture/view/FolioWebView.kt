@@ -77,16 +77,19 @@ class FolioWebView : WebView {
     }
 
     private fun computeHorizontalScroll(event: MotionEvent?): Boolean {
-        if (event == null)
+        if (event == null) {
             return false
+        }
 
         // Rare condition in fast scrolling
-        if (gestureDetector == null)
+        if (gestureDetector == null) {
             return false
+        }
 
         val gestureReturn = gestureDetector!!.onTouchEvent(event)
-        if (gestureReturn)
+        if (gestureReturn) {
             return true
+        }
 
         val superReturn = super.onTouchEvent(event)
 

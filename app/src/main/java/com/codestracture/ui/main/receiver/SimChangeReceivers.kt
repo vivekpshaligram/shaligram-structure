@@ -13,8 +13,9 @@ class SimChangeReceivers : BroadcastReceiver() {
         var state = ""
         if (p1 != null) {
             state = p1.extras?.getString("ss").toString()
-            if (state == "LOADED")
+            if (state == "LOADED") {
                 Log.i(TAG, "SIM Insertion Detected")
+            }
         }
         Log.i(TAG, "SIM State Change Detected $state")
     }

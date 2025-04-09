@@ -196,7 +196,8 @@ class EpubFragment : BaseFragment<FragmentEpubBinding, EpubViewModel>() {
             "http://127.0.0.1:8080/IndieBook_12606/OEBPS/", // "file://$bookRootPath/OEBPS/",
             htmlContent,
             "text/html",
-            "UTF-8", null
+            "UTF-8",
+            null
         )
     }
 
@@ -227,30 +228,42 @@ class EpubFragment : BaseFragment<FragmentEpubBinding, EpubViewModel>() {
         val fontColor = "#000000"
         val backgroundColor = "#FFFFFF"
 
-        if (fontFamily.isNotEmpty()) injectCss(
-            binding.folioWebView,
-            "* { font-family: $fontFamily !important; }"
-        )
-        if (textAlign.isNotEmpty()) injectCss(
-            binding.folioWebView,
-            "* { text-align: $textAlign !important; }"
-        )
-        if (lineHeight.isNotEmpty()) injectCss(
-            binding.folioWebView,
-            "* { line-height: $lineHeight !important; }"
-        )
-        if (wordSpacing.isNotEmpty()) injectCss(
-            binding.folioWebView,
-            "* { word-spacing: $wordSpacing !important; }"
-        )
-        if (letterSpacing.isNotEmpty()) injectCss(
-            binding.folioWebView,
-            "* { letter-spacing: $letterSpacing !important; }"
-        )
-        if (pageMargins.isNotEmpty()) injectCss(
-            binding.folioWebView,
-            "* { margin: $pageMargins !important; }"
-        )
+        if (fontFamily.isNotEmpty()) {
+            injectCss(
+                binding.folioWebView,
+                "* { font-family: $fontFamily !important; }"
+            )
+        }
+        if (textAlign.isNotEmpty()) {
+            injectCss(
+                binding.folioWebView,
+                "* { text-align: $textAlign !important; }"
+            )
+        }
+        if (lineHeight.isNotEmpty()) {
+            injectCss(
+                binding.folioWebView,
+                "* { line-height: $lineHeight !important; }"
+            )
+        }
+        if (wordSpacing.isNotEmpty()) {
+            injectCss(
+                binding.folioWebView,
+                "* { word-spacing: $wordSpacing !important; }"
+            )
+        }
+        if (letterSpacing.isNotEmpty()) {
+            injectCss(
+                binding.folioWebView,
+                "* { letter-spacing: $letterSpacing !important; }"
+            )
+        }
+        if (pageMargins.isNotEmpty()) {
+            injectCss(
+                binding.folioWebView,
+                "* { margin: $pageMargins !important; }"
+            )
+        }
 
         injectCss(binding.folioWebView, "* { color: $fontColor !important; }")
         injectCss(
@@ -299,10 +312,11 @@ class EpubFragment : BaseFragment<FragmentEpubBinding, EpubViewModel>() {
         val openingDivMatch = openingDivPattern.find(html)
         if (openingDivMatch != null) {
             val closingDivMatch = closingDivPattern.find(html, openingDivMatch.range.last)
-            if (closingDivMatch != null)
+            if (closingDivMatch != null) {
                 modifiedHtml = html.replaceRange(openingDivMatch.range, "<div id=\"$id\">")
-            else
+            } else {
                 modifiedHtml = "<div id='$id'>$html</div>"
+            }
         } else {
             modifiedHtml = "<div id='$id'>$html</div>"
         }
@@ -316,12 +330,15 @@ class EpubFragment : BaseFragment<FragmentEpubBinding, EpubViewModel>() {
     }
 
     fun extractBook(be: File, target: String?) {
-        EpubUtils.ExtractBook(requireContext(), be, target, EpubUtils.BookLoadCallback { b ->
-            Log.d("MyTag", "ExtractBook::$b")
-            if (b) {
-                initBook()
+        EpubUtils.ExtractBook(
+            requireContext(), be, target,
+            EpubUtils.BookLoadCallback { b ->
+                Log.d("MyTag", "ExtractBook::$b")
+                if (b) {
+                    initBook()
+                }
             }
-        })
+        )
     }
 
     @Throws(FileNotFoundException::class)
@@ -334,7 +351,6 @@ class EpubFragment : BaseFragment<FragmentEpubBinding, EpubViewModel>() {
     }
 
     private fun getHtmlContent(context: Context, htmlContent: String): String {
-
         var cssPath = String.format(
             context.getString(R.string.css_tag),
             "file:///android_asset/css/Style.css"

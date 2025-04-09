@@ -90,6 +90,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         val fromIndex = (page - 1) * pageSize
         return if (sourceList == null || sourceList.size <= fromIndex) {
             Collections.emptyList()
-        } else sourceList.subList(fromIndex, min(fromIndex + pageSize, sourceList.size))
+        } else {
+            sourceList.subList(fromIndex, min(fromIndex + pageSize, sourceList.size))
+        }
     }
 }

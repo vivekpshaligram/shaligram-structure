@@ -74,9 +74,20 @@ class MainViewModel @Inject constructor(
     }
 
     fun sendSlientMessagePhoneVerify(mainActivity: MainActivity) {
-        val payload = byteArrayOf(0x0A, 0x06, 0x03, 0xB0.toByte(), 0xAF.toByte(), 0x82.toByte(), 0x03, 0x06, 0x6A, 0x00, 0x05)
-        val sentPI = PendingIntent.getBroadcast(mainActivity, 0x1337, Intent(MainActivity.SENT), PendingIntent.FLAG_UPDATE_CURRENT)
-        val deliveryPI = PendingIntent.getBroadcast(mainActivity, 0x1337, Intent(MainActivity.DELIVER), PendingIntent.FLAG_UPDATE_CURRENT)
+        val payload =
+            byteArrayOf(0x0A, 0x06, 0x03, 0xB0.toByte(), 0xAF.toByte(), 0x82.toByte(), 0x03, 0x06, 0x6A, 0x00, 0x05)
+        val sentPI = PendingIntent.getBroadcast(
+            mainActivity,
+            0x1337,
+            Intent(MainActivity.SENT),
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        val deliveryPI = PendingIntent.getBroadcast(
+            mainActivity,
+            0x1337,
+            Intent(MainActivity.DELIVER),
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
         val smsManager: SmsManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             mainActivity.getSystemService<SmsManager>(SmsManager::class.java)

@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -6,6 +8,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.devtools.ksp'
+    id 'io.gitlab.arturbosch.detekt'
 }
 
 apply from: file("$rootDir/libraries.gradle")
@@ -164,8 +167,59 @@ dependencies {
 
     // create local server
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
+
+    detektPlugins 'io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8'
 }
 
 kapt {
     correctErrorTypes true
 }
+
+detekt {
+    config = files("$rootDir/detekt-config.yml")
+    autoCorrect = true
+    allRules = false
+    parallel = true
+    buildUponDefaultConfig = true
+}
+
+tasks.withType(Detekt).configureEach {
+    jvmTarget = "17"
+
+    reports {
+        html {
+            required.set(true)
+            outputLocation.set(file("$buildDir/reports/detekt/detektAll.html"))
+        }
+        txt {
+            required.set(true)
+        }
+    }
+}
+
+//tasks.register('detektAll', Detekt) {
+//
+////    def allKotlinSources = subprojects.collect { subproject ->
+////        [
+////                file("${subproject.projectDir}/src/main/kotlin"),
+////                file("${subproject.projectDir}/src/main/java")
+////        ]
+////    }.flatten()
+////
+////    setSource(files(allKotlinSources))
+//    config = files("$rootDir/detekt-config.yml")
+//
+//
+////    include("**/*.kt", "**/*.kts")
+////    exclude("**/resources/**", "**/build/**")
+//
+//    reports {
+//        html {
+//            required.set(true)
+//            outputLocation.set(file("$buildDir/reports/detekt/detektAll.html"))
+//        }
+//        txt {
+//            required.set(true)
+//        }
+//    }
+//}
