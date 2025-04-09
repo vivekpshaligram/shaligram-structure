@@ -4,6 +4,8 @@ import android.content.Context
 import com.codestracture.BuildConfig
 import com.codestracture.data.api.Api
 import com.codestracture.data.api.interceptor.NetworkConnectionInterceptor
+import com.codestracture.data.manager.preference.PreferenceManager
+import com.codestracture.data.manager.resource.ResourceManger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,4 +62,11 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideApi(retrofit: Retrofit): Api = retrofit.create(Api::class.java)
+
+    @Singleton
+    @Provides
+    fun provideResourceManger(
+        @ApplicationContext context: Context,
+        preferenceManager: PreferenceManager
+    ): ResourceManger = ResourceManger(context, context.resources, preferenceManager)
 }

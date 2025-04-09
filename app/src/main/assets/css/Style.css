@@ -1,0 +1,577 @@
+/**
+ *  Style.css
+ *  FolioReaderKit
+ *
+ *  Created by Heberti Almeida on 06/05/15.
+ *  Copyright (c) 2015 Folio Reader. All rights reserved.
+ */
+
+/* CSS Reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+/* ePUB */
+html {
+    -webkit-text-size-adjust: none; /* Never autoresize text */
+    margin: 0 !important;
+    padding: 0 0 !important;
+    height: 100vh;
+    overflow-x: scroll;
+    direction: rtl;
+}
+
+body {
+    margin: 0 !important;
+    padding: 20px 20px !important;
+    overflow: !important;
+    direction: rtl;
+}
+
+mark {
+    background-color: #FAFF00;
+    color: #000000;
+}
+
+img {
+    height: auto !important;
+}
+
+.page_bookmark::before {
+    content: '';
+    width: 24px;
+    height: 38px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    background-image: url('file:///android_asset/icon/bookmark.png');
+    margin-right: 0.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+/* Custom padding for tablets */
+/*
+@media only screen and (min-device-width: 768px){
+    body {
+        padding: 60px 80px !important;
+    }
+}
+*/
+
+/* Table */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+tbody, tfoot, thead {
+    vertical-align: middle !important;
+}
+td, th, tr {
+    vertical-align: inherit !important;
+}
+
+/* List */
+dd, dir, menu, ol, ul { margin-left: 30px !important; }
+ol { list-style-type: decimal !important; }
+li { display: list-item !important; }
+ol ol, ol ul, ul ol, ul ul {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Links */
+a { -webkit-touch-callout: none; } /* Disable link callback */
+* { -webkit-user-select: text; }
+img { -webkit-user-select: none; }
+p {
+    margin: 1.3em 0 1.5em 0;
+    line-height: 1.40em;
+    letter-spacing: 0.0em;
+    word-spacing: 0.05em;
+    text-indent: 1.25em;
+}
+b, strong, th {font-weight: bolder !important;}
+
+/* Forced font overrides */
+code, kbd, pre, samp, tt {
+    font-family: 'frankRuhlLibre';
+    font-size: 1rem;
+}
+button, input, select, textarea { display: inline-block !important; }
+/*h1, h2, h3, h4, h5, h6 { font-weight: 400!important; }*/
+del, s, strike { text-decoration: line-through!important; }
+hr {
+    background-color: rgba(0,0,0,.1) !important;
+    border: none !important;
+    height: 1px !important;
+}
+
+
+/* Sub and Super */
+big { font-size: 1.15rem !important; }
+small, sub, sup { font-size: .65rem !important; }
+sub { vertical-align: sub !important; }
+sup {
+    font-family: 'frankRuhlLibre';
+    vertical-align: super !important;
+}
+
+
+/* iBooks like */
+a { text-decoration: none; }
+pre { white-space: pre-wrap; }
+@page { margin: 0 0 !important; }
+table, ol, il { text-align: -webkit-auto; }
+h1 ,h2 ,h3 ,h4 ,h5 ,h6 {
+    text-align: -webkit-auto;
+    text-rendering: optimizelegibility;
+}
+
+/* allow breaking of words on headers and anchors as they tend to be larger font size or contain longer words */
+a, h1, h2, h3, h4, h5, h6 {
+    word-break: break-word !important;
+    -webkit-hyphens: none !important;
+    hyphens: none !important;
+}
+
+/* Begin Ted */
+img, svg, audio, video {
+    max-height: 95% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    object-fit: contain;
+    page-break-inside: avoid;
+}
+
+/* End Ted */
+
+/* Divs are also used to size images so make sure the authors get what they intended */
+/* which is for the images boxed in them to be completely visible on screen */
+div { max-width: 100%; }
+aside[epub|type~="footnote"] { display: none !important; }
+ruby > rt, ruby > rp { -webkit-user-select: none; }
+* { -webkit-font-smoothing: subpixel-antialiased }
+
+
+/*
+ *
+ * Highlight classes
+ *
+ */
+
+lk {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
+/* Remove tap highlight */
+input, textarea, button, highlight, select, a {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* Highlight styles */
+html .highlight_yellow {background:#FAFF00}
+html .highlight_green {background:#8FFF00}
+html .highlight_blue {background:#00FFFF}
+html .highlight_pink {background:#FF9B91}
+html .highlight_underline {
+   /* text-decoration: none;
+    border-bottom: 2px solid #F02814;*/
+    padding-left: 20px;
+    position: relative;
+}
+
+html .highlight_yellow, html .highlight_green, html .highlight_blue, html .highlight_pink, span.epub-media-overlay-playing {
+    border-radius: 3px;
+    padding: 0 2px;
+    margin: 0 -2px;
+}
+
+/* default media overlay style */
+.mediaOverlayStyle0 span.epub-media-overlay-playing {
+    background: #ccc
+}
+
+.mediaOverlayStyle1 .epub-media-overlay-playing {
+    border-bottom: dotted 2px transparent;
+    border-radius: 0;
+}
+
+html .highlight_underline::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 0px;
+    background-image: url('file:///android_asset/icon/note.png');
+    margin-right: 0.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/*
+ *
+ * Night mode
+ *
+ */
+
+html {
+    background-color: #FFFFFF !important;
+}
+
+body {
+    background-color: transparent !important;
+}
+
+html.nightMode {
+    background-color: #131313 !important;
+}
+
+.nightMode p, .nightMode div {
+    color: #848484 !important;
+    background-color: transparent !important;
+}
+
+.nightMode h1, .nightMode h2, .nightMode h3, .nightMode h4, .nightMode h5, .nightMode h6 {
+    color: #848484 !important;
+}
+
+html.nightMode .highlight_yellow {background:rgba(250, 255, 0, 0.9)}
+html.nightMode .highlight_green {background:rgba(143, 255, 0, 0.9)}
+html.nightMode .highlight_blue {background:rgba(0, 255, 255, 0.9)}
+html.nightMode .highlight_pink {background:rgba(255, 155, 145, 0.9)}
+html.nightMode .highlight_underline {
+    /*border-bottom: 2px solid rgba(240, 40, 20, 0.6)*/
+    padding-left: 20px;
+    position: relative;
+}
+
+html.nightMode .highlight_underline::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 0px;
+    background-image: url('file:///android_asset/icon/note.png');
+    margin-right: 0.5rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+/*
+ *
+ * Font classes
+ *
+ */
+@font-face {
+    font-family: 'alef';
+    src: url('file:///android_asset/fonts/alef/Alef-Regular.ttf');
+}
+ /*
+@font-face {
+    font-family: 'bellefair';
+    src: url('file:///android_asset/fonts/bellefair/Bellefair-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'frankRuhlLibre';
+    src: url('file:///android_asset/fonts/frankruhllibre/FrankRuhlLibre-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'fredoka';
+    src: url('file:///android_asset/fonts/fredoka/Fredoka-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'heebo';
+    src: url('file:///android_asset/fonts/heebo/Heebo-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'miriamLibre';
+    src: url('file:///android_asset/fonts/miriamlibre/MiriamLibre-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'notoSansHebrew';
+    src: url('file:///android_asset/fonts/notosanshebrew/NotoSansHebrew-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'notoSerifHebrew';
+    src: url('file:///android_asset/fonts/notoserifhebrew/NotoSerifHebrew-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'openSans';
+    src: url('file:///android_asset/fonts/opensans/OpenSans-Regular.ttf');
+}*/
+
+@font-face {
+    font-family: 'arial';
+    src: url('file:///android_asset/fonts/arial/Arial.ttf');
+}
+
+@font-face {
+    font-family: 'assistant';
+    src: url('file:///android_asset/fonts/assistant/Assistant.ttf');
+}
+
+@font-face {
+    font-family: 'david';
+    src: url('file:///android_asset/fonts/david/David.ttf');
+}
+
+@font-face {
+    font-family: 'miriam';
+    src: url('file:///android_asset/fonts/miriam/Miriam.ttf');
+}
+
+@font-face {
+    font-family: 'times';
+    src: url('file:///android_asset/fonts/times/Times.ttf');
+}
+
+@font-face {
+    font-family: 'rubik';
+    src: url('file:///android_asset/fonts/rubik/Rubik-Regular.ttf');
+}
+
+.alef {
+     font-family: "alef" !important;
+}
+.arial {
+     font-family: "arial" !important;
+}
+.assistant {
+     font-family: "assistant" !important;
+}
+.david {
+     font-family: "david" !important;
+}
+.miriam {
+     font-family: "miriam" !important;
+}
+.times {
+     font-family: "times" !important;
+}
+/*
+.bellefair {
+     font-family: "bellefair" !important;
+}
+.frankRuhlLibre {
+     font-family: "frankRuhlLibre" !important;
+}
+.fredoka {
+     font-family: "fredoka" !important;
+}
+.heebo {
+     font-family: "heebo" !important;
+}
+.miriamLibre {
+     font-family: "miriamLibre" !important;
+}
+.notoSansHebrew {
+     font-family: "notoSansHebrew" !important;
+}
+.notoSerifHebrew {
+     font-family: "notoSerifHebrew" !important;
+}
+.openSans {
+     font-family: "openSans" !important;
+}*/
+.rubik {
+     font-family: "rubik" !important;
+}
+
+/*
+@font-face {
+    font-family: 'andada';
+    src: url('file:///android_asset/fonts/andada/Andada-Regular.otf');
+}
+
+@font-face {
+    font-family: 'lato';
+    src: url('file:///android_asset/fonts/lato/Lato-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'lora';
+    src: url('file:///android_asset/fonts/lora/Lora-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'raleway';
+    src: url('file:///android_asset/fonts/raleway/Raleway-Regular.ttf');
+}
+
+.andada {
+     font-family: "andada", sans-serif;
+ }
+.lato {
+     font-family: "lato", serif;
+ }
+.lora {
+     font-family: "lora", serif;
+ }
+.raleway {
+     font-family: "raleway", sans-serif;
+ }
+ */
+html.textSize13 { font-size: 13px !important; }
+html.textSize14 { font-size: 14px !important; }
+html.textSize15 { font-size: 15px !important; }
+html.textSize16 { font-size: 16px !important; }
+html.textSize17 { font-size: 17px !important; }
+html.textSize18 { font-size: 18px !important; }
+html.textSize19 { font-size: 19px !important; }
+html.textSize20 { font-size: 20px !important; }
+html.textSize21 { font-size: 21px !important; }
+html.textSize22 { font-size: 22px !important; }
+html.textSize23 { font-size: 23px !important; }
+html.textSize24 { font-size: 24px !important; }
+html.textSize25 { font-size: 25px !important; }
+html.textSize26 { font-size: 26px !important; }
+html.textSize27 { font-size: 27px !important; }
+html.textSize28 { font-size: 28px !important; }
+html.textSize29 { font-size: 29px !important; }
+html.textSize30 { font-size: 30px !important; }
+html.textSize31 { font-size: 31px !important; }
+html.textSize32 { font-size: 32px !important; }
+html.textSize33 { font-size: 33px !important; }
+html.textSize34 { font-size: 34px !important; }
+html.textSize35 { font-size: 35px !important; }
+html.textSize36 { font-size: 36px !important; }
+html.textSize37 { font-size: 37px !important; }
+html.textSize38 { font-size: 38px !important; }
+html.textSize39 { font-size: 39px !important; }
+html.textSize40 { font-size: 40px !important; }
+html.textSize41 { font-size: 41px !important; }
+html.textSize42 { font-size: 42px !important; }
+html.textSize43 { font-size: 43px !important; }
+html.textSize44 { font-size: 44px !important; }
+html.textSize45 { font-size: 45px !important; }
+html.textSize46 { font-size: 46px !important; }
+html.textSize47 { font-size: 47px !important; }
+html.textSize48 { font-size: 48px !important; }
+html.textSize49 { font-size: 49px !important; }
+html.textSize50 { font-size: 50px !important; }
+html.textSize51 { font-size: 51px !important; }
+html.textSize52 { font-size: 52px !important; }
+html.textSize53 { font-size: 53px !important; }
+html.textSize54 { font-size: 54px !important; }
+html.textSize55 { font-size: 55px !important; }
+html.textSize56 { font-size: 56px !important; }
+html.textSize57 { font-size: 57px !important; }
+html.textSize58 { font-size: 58px !important; }
+html.textSize59 { font-size: 59px !important; }
+html.textSize60 { font-size: 60px !important; }
+html.textSize61 { font-size: 61px !important; }
+html.textSize62 { font-size: 62px !important; }
+html.textSize63 { font-size: 63px !important; }
+html.textSize64 { font-size: 64px !important; }
+html.textSize65 { font-size: 65px !important; }
+html.textSize66 { font-size: 66px !important; }
+html.textSize67 { font-size: 67px !important; }
+html.textSize68 { font-size: 68px !important; }
+html.textSize69 { font-size: 69px !important; }
+html.textSize70 { font-size: 70px !important; }
+html.textSize71 { font-size: 71px !important; }
+html.textSize72 { font-size: 72px !important; }
+html.textSize73 { font-size: 73px !important; }
+html.textSize74 { font-size: 74px !important; }
+html.textSize75 { font-size: 75px !important; }
+html.textSize76 { font-size: 76px !important; }
+html.textSize77 { font-size: 77px !important; }
+html.textSize78 { font-size: 78px !important; }
+html.textSize79 { font-size: 79px !important; }
+
+.chaptersplit::after {
+    display: 'block' !important;
+    text-align: 'center' !important;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    letter-spacing: -0.1em;
+    word-spacing: 0.05em;
+}
+h2 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.1em;
+    word-spacing: 0.05em;
+}
+h3 {
+    font-size: 1.17rem;
+    line-height: 1.2;
+    letter-spacing: -0.1em;
+    word-spacing: 0.05em;
+}
+h4 {
+    font-size: 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.1em;
+    word-spacing: 0.05em;
+}
+h5 {
+    font-size: 0.83rem;
+    line-height: 1.2;
+    letter-spacing: -0.1em;
+    word-spacing: 0.05em;
+}
+h6 {
+    font-size: 0.67rem;
+    line-height: 1.2;
+    letter-spacing: -0.1em;
+    word-spacing: 0.05em;
+}
+body {
+    word-break: break-word !important;
+    -webkit-hyphens: auto !important;
+    hyphens: auto !important;
+}
+p, span, div {
+   line-height: 1.5;
+   letter-spacing: -0.1em;
+   word-spacing: 0.05em;
+}
+@media only screen and (min-device-width: 600px) {
+    div {
+        font-size: 1rem;
+        line-height: 1.438em;
+        letter-spacing: -0.1em;
+        word-spacing: 0.05em;
+    }
+    body {
+        -webkit-hyphens: none !important;
+        hyphens: none !important;
+    }
+}

@@ -13,22 +13,27 @@ plugins {
 
 apply from: file("$rootDir/libraries.gradle")
 apply from: file("$rootDir/ktlint.gradle")
-//apply from: file("$rootDir/detekt.gradle")
 
 android {
     namespace 'com.codestracture'
-    compileSdk 35
+    testNamespace "com.codestracture.test"
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.codestracture"
         minSdk 23
-        targetSdk 35
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
-       // testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
         buildConfigField 'String', 'BASE_URL', "\"https://portal.courtesycarsredhill.co.uk/CCRAPI/api/\""
+
+        testApplicationId "com.codestracture.test"
+        testInstrumentationRunner 'com.codestracture.test.Instrumentation'
+        testInstrumentationRunnerArguments = [
+         cucumberUseAndroidJUnitRunner: 'com.codestracture.test.Instrumentation',
+         clearPackageData: 'true'
+        ]
     }
 
     signingConfigs {
@@ -50,18 +55,30 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     buildFeatures {
         viewBinding = true
         dataBinding = true
         buildConfig = true
+    }
+
+
+    sourceSets {
+        androidTest {
+            assets.srcDirs = ['src/androidTest/assets']
+        }
+    }
+
+    testOptions {
+        execution = 'ANDROIDX_TEST_ORCHESTRATOR'
+        animationsDisabled = true
     }
 
     lint {
@@ -105,7 +122,7 @@ dependencies {
 
     //DI
     implementation google.hiltAndroid
-    kapt google.hiltAndroidCompiler
+    ksp google.hiltAndroidCompiler
     implementation google.hiltWork
 
     //Retrofit & OkHttp
@@ -124,6 +141,32 @@ dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.8.1'
 
     implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.4.0'
+
+    androidTestImplementation "com.google.dagger:hilt-android-testing:2.52"
+    ksp 'com.google.dagger:hilt-android-compiler:2.52'
+
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.5.1')
+    androidTestImplementation('androidx.test:rules:1.4.0')
+    androidTestImplementation('androidx.test:core:1.4.0')
+    androidTestImplementation('androidx.test:runner:1.4.0')
+    androidTestImplementation('androidx.test.ext:junit-ktx:1.1.5')
+
+    androidTestImplementation "io.cucumber:cucumber-picocontainer:4.8.1"
+    androidTestImplementation "io.cucumber:cucumber-android:4.9.0"
+    androidTestImplementation "io.cucumber:cucumber-android-hilt:4.10.0"
+
+    androidTestUtil 'androidx.test:orchestrator:1.4.0'
+
+    implementation("com.github.ghost1372:Mzip-Android:0.4.0")
+
+    implementation 'com.caverock:androidsvg-aar:1.4'
+
+    implementation "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.2.5"
+
+    implementation 'jp.wasabeef:blurry:4.0.1'
+
+    // create local server
+    implementation 'org.nanohttpd:nanohttpd:2.3.1'
 
     detektPlugins 'io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8'
 }

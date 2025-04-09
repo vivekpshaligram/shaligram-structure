@@ -13,6 +13,7 @@ import com.codestracture.utils.ext.checkPermissionGranted
 import com.codestracture.utils.ext.requestPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.min
 import com.codestracture.ui.home.HomeEpoxyController as HomeController
 
@@ -60,8 +61,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         binding.epoxyRecyclerView.setController(homeController)
 
-        abcdjkjshfksjdfhsdkljfhsjkdfhskdjfhsdfkjhsdkfhskdjfhsdkjfhsklfjhsdkfljhsdkfjhsdkjfhsdfskjdfskdj()
-
         homeController.setMainViewClickListener {
             Log.d("MyTag", "RootViewClick")
         }
@@ -78,9 +77,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         binding.stopUpdate.setOnClickListener {
             // viewModel.stopLocationUpdate()
-            /*val intent = Intent(requireContext(), LauncherActivity::class.java)
-            intent.data = Uri.parse("https://beer.conn.dev?client_version=1")
-            startActivity(intent)*/
             Log.d("MyTag", "currentPage:$currentPage")
             val newList = getPage(list, currentPage, 10)
             Log.d("MyTag", "newListSize:${newList.size}")
@@ -97,12 +93,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         } else {
             sourceList.subList(fromIndex, min(fromIndex + pageSize, sourceList.size))
         }
-    }
-
-    fun abcdjkjshfksjdfhsdkljfhsjkdfhskdjfhsdfkjhsdkfhskdjfhsdkjfhsklfjhsdkfljhsdkfjhsdkjfhsdfskjdfskdj() {
-        Log.d(
-            "MyTag",
-            "abcdjkjshfksjdfhsdkljfhsjkdfhskdjfhsdfkjhsdkfhskdjfhsdkjfhsklfjhsdkfljhsdkfjhsdkjfhsdfskjdfskdj"
-        )
     }
 }
