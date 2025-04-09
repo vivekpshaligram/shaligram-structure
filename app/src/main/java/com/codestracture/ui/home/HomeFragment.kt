@@ -13,7 +13,6 @@ import com.codestracture.utils.ext.checkPermissionGranted
 import com.codestracture.utils.ext.requestPermissions
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.min
 import com.codestracture.ui.home.HomeEpoxyController as HomeController
 
@@ -61,6 +60,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
         binding.epoxyRecyclerView.setController(homeController)
 
+        abcdjkjshfksjdfhsdkljfhsjkdfhskdjfhsdfkjhsdkfhskdjfhsdkjfhsklfjhsdkfljhsdkfjhsdkjfhsdfskjdfskdj()
+
         homeController.setMainViewClickListener {
             Log.d("MyTag", "RootViewClick")
         }
@@ -93,6 +94,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         val fromIndex = (page - 1) * pageSize
         return if (sourceList == null || sourceList.size <= fromIndex) {
             Collections.emptyList()
-        } else sourceList.subList(fromIndex, min(fromIndex + pageSize, sourceList.size))
+        } else {
+            sourceList.subList(fromIndex, min(fromIndex + pageSize, sourceList.size))
+        }
+    }
+
+    fun abcdjkjshfksjdfhsdkljfhsjkdfhskdjfhsdfkjhsdkfhskdjfhsdkjfhsklfjhsdkfljhsdkfjhsdkjfhsdfskjdfskdj() {
+        Log.d(
+            "MyTag",
+            "abcdjkjshfksjdfhsdkljfhsjkdfhskdjfhsdfkjhsdkfhskdjfhsdkjfhsklfjhsdkfljhsdkfjhsdkjfhsdfskjdfskdj"
+        )
     }
 }

@@ -51,7 +51,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
             positiveButtonId = R.string.btn_login,
             positiveClick = {
                 gotoHomeScreen()
-            })
+            }
+        )
     }
 
     private fun gotoHomeScreen() {
@@ -75,22 +76,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     @SuppressLint("MissingPermission")
-    private val locationPermissionsResult = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
-        if (!it.values.contains(false)) {
-            Log.d("MyTag", "Location permission Granted")
-            if (checkFineLocationPermission()) {
-                Log.d("MyTag", "Fine Location")
-            } else if (checkCoarseLocationPermission()) {
-                Log.d("MyTag", "Coarse Location")
-            }
-        } else {
-            Log.d("MyTag", "Location permission Deny")
-            if (checkFineLocationPermission()) {
-                Log.d("MyTag", "Fine Location")
-            } else if (checkCoarseLocationPermission()) {
-                Log.d("MyTag", "Coarse Location")
-                initView()
+    private val locationPermissionsResult =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+            if (!it.values.contains(false)) {
+                Log.d("MyTag", "Location permission Granted")
+                if (checkFineLocationPermission()) {
+                    Log.d("MyTag", "Fine Location")
+                } else if (checkCoarseLocationPermission()) {
+                    Log.d("MyTag", "Coarse Location")
+                }
+            } else {
+                Log.d("MyTag", "Location permission Deny")
+                if (checkFineLocationPermission()) {
+                    Log.d("MyTag", "Fine Location")
+                } else if (checkCoarseLocationPermission()) {
+                    Log.d("MyTag", "Coarse Location")
+                    initView()
+                }
             }
         }
-    }
 }

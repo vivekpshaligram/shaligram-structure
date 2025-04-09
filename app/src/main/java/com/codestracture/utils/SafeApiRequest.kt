@@ -7,7 +7,6 @@ import java.lang.StringBuilder
 
 class SafeApiRequest {
     suspend fun <T : Any> apiRequest(call: suspend () -> Response<T>): T {
-
         val response = call.invoke()
         val message = StringBuilder()
 
